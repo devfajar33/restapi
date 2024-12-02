@@ -6,11 +6,13 @@ using api.Data;
 using api.DTO.Transactions;
 using api.Interface;
 using api.Mappers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace api.Controllers
 {
+    [Authorize]
     [Route("api/transaction")]
     [ApiController]
     public class TransactionController : ControllerBase

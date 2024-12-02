@@ -157,3 +157,4 @@ D:\PT PMLI\PROJECT\Net Core\RestAPI-V2\api\obj\Debug\net9.0\api.genruntimeconfig
 D:\PT PMLI\PROJECT\Net Core\RestAPI-V2\api\obj\Debug\net9.0\ref\api.dll
 D:\PT PMLI\PROJECT\Net Core\RestAPI-V2\api\bin\Debug\net9.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 D:\PT PMLI\PROJECT\Net Core\RestAPI-V2\api\bin\Debug\net9.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+D:\PT PMLI\PROJECT\NET CORE\RestAPI-V2\api\obj\Debug\net9.0\api.sourcelink.json

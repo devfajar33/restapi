@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\PT PMLI\\PROJECT\\Net Core\\RestAPI-V2\\api\\api.csproj": {}
+    "D:\\PT PMLI\\PROJECT\\NET CORE\\RestAPI-V2\\api\\api.csproj": {}
   },
   "projects": {
-    "D:\\PT PMLI\\PROJECT\\Net Core\\RestAPI-V2\\api\\api.csproj": {
+    "D:\\PT PMLI\\PROJECT\\NET CORE\\RestAPI-V2\\api\\api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\PT PMLI\\PROJECT\\Net Core\\RestAPI-V2\\api\\api.csproj",
+        "projectUniqueName": "D:\\PT PMLI\\PROJECT\\NET CORE\\RestAPI-V2\\api\\api.csproj",
         "projectName": "api",
-        "projectPath": "D:\\PT PMLI\\PROJECT\\Net Core\\RestAPI-V2\\api\\api.csproj",
+        "projectPath": "D:\\PT PMLI\\PROJECT\\NET CORE\\RestAPI-V2\\api\\api.csproj",
         "packagesPath": "C:\\Users\\PELINDO\\.nuget\\packages\\",
-        "outputPath": "D:\\PT PMLI\\PROJECT\\Net Core\\RestAPI-V2\\api\\obj\\",
+        "outputPath": "D:\\PT PMLI\\PROJECT\\NET CORE\\RestAPI-V2\\api\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\PELINDO\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -47,6 +47,10 @@
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
               "version": "[9.0.0, )"
+            },
+            "Microsoft.AspNetCore.Cors": {
+              "target": "Package",
+              "version": "[2.2.0, )"
             },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
