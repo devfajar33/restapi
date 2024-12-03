@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, Link  } from "react-router-dom";
 
-const Dashboard = ({ setAuthenticated }) => {
+const Transactions = ({ setAuthenticated }) => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -9,17 +9,11 @@ const Dashboard = ({ setAuthenticated }) => {
   const navigate = useNavigate();
   const token = localStorage.getItem('authToken');
 
-  const handleLogout = () => {
-    setAuthenticated(false);
-    localStorage.removeItem('authToken');
-    navigate("/login");
-  };
-
   useEffect(() => {
     const fetchData = async () => {
       try {
         // Fetch data with Authorization token in the headers
-        const response = await fetch('http://localhost:5258/api/stock/', {
+        const response = await fetch('http://localhost:5258/api/transaction/', {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${token}`, // Add the token in the Authorization header
@@ -33,7 +27,7 @@ const Dashboard = ({ setAuthenticated }) => {
         }
 
         const data = await response.json(); 
-        setData(data.data); 
+        setData(data); 
         setLoading(false);
 
       } catch (error) {
@@ -53,17 +47,37 @@ const Dashboard = ({ setAuthenticated }) => {
     return <div>Error: {error}</div>;
   }
 
+  const handleProcess = async (id) => {
+    navigate(`/process_data/${id}`);
+  };
+
   return (
     <div className="dashboard-container">
-      <h2>Dashboard</h2>
-      <Link to="/products">Product</Link>&nbsp;&nbsp;
-      <Link to="/view_transactions">Transactions</Link>&nbsp;&nbsp;
-      <Link to="/report">Laporan</Link>
-      <br/>
-      <br/>
-      <button onClick={handleLogout}>Logout</button>
+      <h2>Report Transactions</h2>
+      <Link to="/dashboard">Back</Link>
+      <br/><br/>
+      <table border="1">
+        <thead>
+          <tr>
+            <td>Name</td>
+            <td>Stock</td>
+            <td>Price</td>
+            <td>Total Price</td>
+          </tr>
+        </thead>
+        <tbody>            
+          {Array.isArray(data) && data.map((item, index) => (
+            <tr key={index}>
+              <td>{item.name}</td>
+              <td>{item.stock}</td>
+              <td>{item.price}</td>
+              <td>{item.totalPrice}</td>
+            </tr>
+          ))}
+        </tbody>
+    </table>
     </div>
   );
 };
 
-export default Dashboard;
+export default Transactions;

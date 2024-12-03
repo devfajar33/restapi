@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 
 const Update = () => {
   const navigate = useNavigate();
@@ -128,7 +128,8 @@ const Update = () => {
           </select>
         </div>
         <br/>
-        <button type="submit">Submit</button>
+        <button type="submit">Submit</button>&nbsp;
+        <Link to="/dashboard">Back</Link>
       </form>
     </div>
   );

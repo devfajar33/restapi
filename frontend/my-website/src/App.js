@@ -5,6 +5,7 @@ import Products from "./pages/product";
 import AddNew from "./pages/input_data";
 import Update from "./pages/update_data";
 import ViewTransactions from "./pages/view_transaction";
+import ReportTransactions from "./pages/report";
 import Transactions from "./pages/transactions";
 import AddTransactions from "./pages/input_transactions";
 import Dashboard from "./pages/dashboard";
@@ -77,6 +78,14 @@ const App = () => {
             path="/process_data/:id"
             element={token ? (
               <AddTransactions setAuthenticated={setAuthenticated} />
+            ) : (
+              <Login setAuthenticated={setAuthenticated} />
+            )}
+          />
+          <Route
+            path="/report/"
+            element={token ? (
+              <ReportTransactions setAuthenticated={setAuthenticated} />
             ) : (
               <Login setAuthenticated={setAuthenticated} />
             )}
