@@ -8,6 +8,8 @@ using api.DTO.Items;
 using api.DTO.Transactions;
 using api.Interface;
 using api.Models;
+using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace api.Repository
@@ -49,8 +51,12 @@ namespace api.Repository
                 return null;
             }
 
+            if(existingItem.Stock <= transactionModel.Stock)
+            {
+                return null;
+            }
+
             existingItem.Stock = existingItem.Stock - transactionModel.Stock;
-            // await _context.SaveChangesAsync();
 
             await _context.Transactions.AddAsync(transactionModel);
             await _context.SaveChangesAsync();

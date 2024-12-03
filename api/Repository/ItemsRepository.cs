@@ -13,6 +13,16 @@ namespace api.Repository
 {
     public class ItemsRepository : IItemsRepository
     {
+        private readonly string _storagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "products");
+        public ItemsRepository()
+        {
+            // Ensure the directory exists
+            if (!Directory.Exists(_storagePath))
+            {
+                Directory.CreateDirectory(_storagePath);
+            }
+        }
+
         private readonly ApplicationDBContext _context;
         public ItemsRepository(ApplicationDBContext context)
         {

@@ -107,5 +107,7 @@ app.UseAuthorization();
 app.UseCors("AllowSpecificOrigins"); // Use the specific CORS policy defined above
 app.MapControllers();
 
+app.UseStaticFiles();
+
 app.Run();
 
