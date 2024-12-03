@@ -103,8 +103,11 @@ const Update = () => {
       if (!res.ok) {
         throw new Error("Error with API request");
       }
-
-      alert('Data updated successfully!');
+      if(res.status == 204)
+        alert('Stock melebihi maximum');
+      else
+        alert('Data updated successfully!');
+      
       navigate(`/transactions`);
 
     } catch (error) {
