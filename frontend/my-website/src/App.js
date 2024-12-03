@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Login from "./pages/login";
+import Products from "./pages/product";
 import AddNew from "./pages/input_data";
 import Update from "./pages/update_data";
+import ViewTransactions from "./pages/view_transaction";
 import Transactions from "./pages/transactions";
 import AddTransactions from "./pages/input_transactions";
 import Dashboard from "./pages/dashboard";
@@ -32,6 +34,14 @@ const App = () => {
             )}
           />
           <Route
+            path="/products"
+            element={token ? (
+              <Products setAuthenticated={setAuthenticated} />
+            ) : (
+              <Login setAuthenticated={setAuthenticated} />
+            )}
+          />
+          <Route
             path="/add_new"
             element={token ? (
               <AddNew setAuthenticated={setAuthenticated} />
@@ -43,6 +53,14 @@ const App = () => {
             path="/edit_data/:id"
             element={token ? (
               <Update setAuthenticated={setAuthenticated} />
+            ) : (
+              <Login setAuthenticated={setAuthenticated} />
+            )}
+          />
+          <Route
+            path="/view_transactions/"
+            element={token ? (
+              <ViewTransactions setAuthenticated={setAuthenticated} />
             ) : (
               <Login setAuthenticated={setAuthenticated} />
             )}

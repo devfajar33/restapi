@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, Link  } from "react-router-dom";
 
-const Transactions = ({ setAuthenticated }) => {
+const Products = ({ setAuthenticated }) => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -47,14 +47,36 @@ const Transactions = ({ setAuthenticated }) => {
     return <div>Error: {error}</div>;
   }
 
-  const handleProcess = async (id) => {
-    navigate(`/process_data/${id}`);
+  const handleDelete = async (id) => {
+    try {
+      const response = await fetch(`http://localhost:5258/api/stock/${id}`, {
+        method: "DELETE",  // HTTP method to delete the resource
+        headers: {
+          'Authorization': `Bearer ${token}`, // Add the token in the Authorization header
+          'Content-Type': 'application/json' // Optional: Specify the content type
+        },
+      });
+      
+      if (response.ok) {
+        alert('Delete data success.');   
+        window.location.reload();
+      } else {
+        console.error("Failed to delete the item");
+      }
+    } catch (error) {
+      console.error("Error deleting item:", error);
+    }
+  };
+
+  const handleEdit = async (id) => {
+    navigate(`/edit_data/${id}`);
   };
 
   return (
     <div className="dashboard-container">
-      <h2>Transactions</h2>
-      <Link to="/view_transactions">Back</Link>
+      <h2>Product</h2>
+      <Link to="/add_new">Add New Product</Link>&nbsp;&nbsp;
+      <Link to="/dashboard">Back</Link>
       <br/><br/>
       <table border="1">
         <thead>
@@ -72,7 +94,8 @@ const Transactions = ({ setAuthenticated }) => {
               <td>{item.stock}</td>
               <td>{item.price}</td>
               <td>
-                <button onClick={() => handleProcess(item.id)}>Process</button>
+                <button onClick={() => handleEdit(item.id)}>Edit</button>
+                <button onClick={() => handleDelete(item.id)}>Delete</button>
               </td>
             </tr>
           ))}
@@ -82,4 +105,4 @@ const Transactions = ({ setAuthenticated }) => {
   );
 };
 
-export default Transactions;
+export default Products;

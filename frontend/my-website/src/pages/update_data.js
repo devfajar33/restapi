@@ -75,7 +75,7 @@ const Update = () => {
       }
 
       alert('Data updated successfully!');
-      navigate(`/dashboard`);
+      navigate(`/products`);
 
     } catch (err) {
       setError(err.message);

@@ -17,4 +17,15 @@ namespace api.DTO.Transactions
         public DateTime? Created_At { get; set; }
         public DateTime? Updated_At { get; set; }
     }
+
+    public class ViewTransactionDTO
+    {
+        public int IdItems { get; set; }
+        public string Name { get; set; }
+        public decimal Stock { get; set; }
+        public decimal Price{ get; set; }
+        public decimal TotalPrice{ get; set; }
+        public int Created_By { get; set; }
+        public DateTime? Created_At { get; set; }
+    }
 }

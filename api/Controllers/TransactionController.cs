@@ -26,10 +26,8 @@ namespace api.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var transactions = await _transactionRepo.GetAllAsync();
-            var transactionDTO_ = transactions.Select(s => s.ToTransactionDTO());
-
-            return Ok(transactionDTO_);
+            var transactions = await _transactionRepo.GetJoinAsync();
+            return Ok(transactions);
         }
 
         [HttpPost]

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 const Input = () => {
   const navigate = useNavigate();
@@ -47,7 +47,7 @@ const Input = () => {
       }
 
       alert('Data has been saved');
-      navigate(`/dashboard`);
+      navigate(`/products`);
 
     } catch (error) {
       console.error("Error:", error);
@@ -99,7 +99,8 @@ const Input = () => {
           </select>
         </div>
         <br/>
-        <button type="submit">Submit</button>
+        <button type="submit">Submit</button>&nbsp;
+        <Link to="/dashboard">Back</Link>
       </form>
     </div>
   );

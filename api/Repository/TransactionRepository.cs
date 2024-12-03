@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using api.Data;
 using api.DTO.Items;
+using api.DTO.Transactions;
 using api.Interface;
 using api.Models;
 using Microsoft.EntityFrameworkCore;
@@ -25,6 +26,20 @@ namespace api.Repository
         public async Task<Transactions?> GetByIdAsync(int id)
         {
             return await _context.Transactions.FindAsync(id);
+        }
+        public async Task<List<ViewTransactionDTO>> GetJoinAsync()
+        {   
+            var result = await (from trans in _context.Transactions
+                            join items in _context.Items on trans.IdItems equals items.Id
+                            select new ViewTransactionDTO
+                            {
+                                IdItems = trans.IdItems,
+                                Name = items.Name,
+                                Stock = trans.Stock,
+                                Price = trans.Price,
+                                TotalPrice = trans.TotalPrice,
+                            }).ToListAsync();
+            return result;
         }
         public async Task<Transactions> CreateAsync(Transactions transactionModel)
         {

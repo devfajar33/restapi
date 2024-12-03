@@ -11,8 +11,8 @@ const Dashboard = ({ setAuthenticated }) => {
 
   const handleLogout = () => {
     setAuthenticated(false);
-    localStorage.clear();
-    navigate("/");
+    localStorage.removeItem('authToken');
+    navigate("/login");
   };
 
   useEffect(() => {
@@ -53,62 +53,14 @@ const Dashboard = ({ setAuthenticated }) => {
     return <div>Error: {error}</div>;
   }
 
-  const handleDelete = async (id) => {
-    try {
-      const response = await fetch(`http://localhost:5258/api/stock/${id}`, {
-        method: "DELETE",  // HTTP method to delete the resource
-        headers: {
-          'Authorization': `Bearer ${token}`, // Add the token in the Authorization header
-          'Content-Type': 'application/json' // Optional: Specify the content type
-        },
-      });
-      
-      if (response.ok) {
-        alert('Delete data success.');   
-        window.location.reload();
-      } else {
-        console.error("Failed to delete the item");
-      }
-    } catch (error) {
-      console.error("Error deleting item:", error);
-    }
-  };
-
-  const handleEdit = async (id) => {
-    navigate(`/edit_data/${id}`);
-  };
-
   return (
     <div className="dashboard-container">
-      <h2>Product</h2>
-      <Link to="/add_new">Add New Product</Link>&nbsp;&nbsp;
-      <Link to="/transactions">Transactions</Link>
-      <br/><br/>
-      <table border="1">
-        <thead>
-          <tr>
-            <td>Name</td>
-            <td>Stock</td>
-            <td>Price</td>
-            <td>Action</td>
-          </tr>
-        </thead>
-        <tbody>            
-          {Array.isArray(data) && data.map((item, index) => (
-            <tr key={index}>
-              <td>{item.name}</td>
-              <td>{item.stock}</td>
-              <td>{item.price}</td>
-              <td>
-                <button onClick={() => handleEdit(item.id)}>Edit</button>
-                <button onClick={() => handleDelete(item.id)}>Delete</button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-    </table>
-    <br/>
-    <button onClick={handleLogout}>Logout</button>
+      <h2>Dashboard</h2>
+      <Link to="/products">Product</Link>&nbsp;&nbsp;
+      <Link to="/view_transactions">Transactions</Link>
+      <br/>
+      <br/>
+      <button onClick={handleLogout}>Logout</button>
     </div>
   );
 };

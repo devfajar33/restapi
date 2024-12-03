@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 
 const Update = () => {
   const navigate = useNavigate();
   const { id } = useParams();
 
   const [data, setData] = useState({
-    idItems: id,
+    ItemsId: id,
     name: "",
     stock_x: "",
     price_x: "",
@@ -14,6 +14,14 @@ const Update = () => {
     price: "",
     totalPrice: "",
     image: "-",
+    created_By: "1",
+    created_At: "2024-12-02T12:42:46.303"
+  });
+  const [dataProduct, setDataProduct] = useState({
+    ItemsId: id,
+    stock: "",
+    price: "",
+    totalPrice: "",
     created_By: "1",
     created_At: "2024-12-02T12:42:46.303"
   });
@@ -26,7 +34,7 @@ const Update = () => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setData((prevData) => ({
+    setDataProduct((prevData) => ({
       ...prevData,
       [name]: value
     }));
@@ -57,6 +65,14 @@ const Update = () => {
             created_By: "1",
             created_At: "2024-12-02T12:42:46.303"
         });
+        setDataProduct({
+          idItems: result.data.id,  
+          stock: "",
+          price: "",
+          totalPrice: "",
+          created_By: "1",
+          created_At: "2024-12-02T12:42:46.303"
+        });
 
       } catch (err) {
         setError(err.message);
@@ -75,26 +91,24 @@ const Update = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const response = await fetch(`http://localhost:5258/api/transaction/`, {
-        method: 'POST', 
+      const res = await fetch('http://localhost:5258/api/transaction/', {
+        method: "POST", // Change to GET if you are fetching data
         headers: {
-            'Authorization': `Bearer ${token}`, // Add the token in the Authorization header
-            'Content-Type': 'application/json' // Optional: Specify the content type
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`  // Pass the API token here
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify(dataProduct)  // Send data as JSON
       });
 
-      if (!response.ok) {
-        throw new Error('Failed to update data');
+      if (!res.ok) {
+        throw new Error("Error with API request");
       }
 
-      console.log(data);
       alert('Data updated successfully!');
-      navigate(`/dashboard`);
+      navigate(`/transactions`);
 
-    } catch (err) {
-      setError(err.message);
-      setLoading(false);
+    } catch (error) {
+      console.error("Error:", error);
     }
   };
 
@@ -121,7 +135,7 @@ const Update = () => {
           />
         </div>
         <div>
-          <label>Price : </label>
+          <label>Price Items : </label>
           <input
             type="number"
             name="prices"
@@ -131,11 +145,11 @@ const Update = () => {
         </div>
         <hr/>
         <div>
-          <label>Stock : </label>
+          <label>Stock Request : </label>
           <input
             type="number"
             name="stock"
-            value={data.stock}
+            value={dataProduct.stock}
             onChange={handleInputChange}
           />
         </div>
@@ -144,7 +158,7 @@ const Update = () => {
           <input
             type="number"
             name="price"
-            value={data.price}
+            value={dataProduct.price}
             onChange={handleInputChange}
           />
         </div>
@@ -153,7 +167,7 @@ const Update = () => {
           <input
             type="number"
             name="totalPrice"
-            value={data.totalPrice}
+            value={dataProduct.totalPrice}
             onChange={handleInputChange}
           />
         </div>
@@ -171,7 +185,8 @@ const Update = () => {
           </select>
         </div>
         <br/>
-        <button type="submit">Submit</button>
+        <button type="submit">Submit</button>&nbsp;
+        <Link to="/transactions">Back</Link>
       </form>
     </div>
   );

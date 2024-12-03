@@ -13,7 +13,7 @@ const Transactions = ({ setAuthenticated }) => {
     const fetchData = async () => {
       try {
         // Fetch data with Authorization token in the headers
-        const response = await fetch('http://localhost:5258/api/stock/', {
+        const response = await fetch('http://localhost:5258/api/transaction/', {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${token}`, // Add the token in the Authorization header
@@ -27,7 +27,7 @@ const Transactions = ({ setAuthenticated }) => {
         }
 
         const data = await response.json(); 
-        setData(data.data); 
+        setData(data); 
         setLoading(false);
 
       } catch (error) {
@@ -54,7 +54,8 @@ const Transactions = ({ setAuthenticated }) => {
   return (
     <div className="dashboard-container">
       <h2>Transactions</h2>
-      <Link to="/view_transactions">Back</Link>
+      <Link to="/transactions">Request</Link>&nbsp;
+      <Link to="/dashboard">Back</Link>
       <br/><br/>
       <table border="1">
         <thead>
@@ -62,7 +63,7 @@ const Transactions = ({ setAuthenticated }) => {
             <td>Name</td>
             <td>Stock</td>
             <td>Price</td>
-            <td>Action</td>
+            <td>Total Price</td>
           </tr>
         </thead>
         <tbody>            
@@ -71,9 +72,7 @@ const Transactions = ({ setAuthenticated }) => {
               <td>{item.name}</td>
               <td>{item.stock}</td>
               <td>{item.price}</td>
-              <td>
-                <button onClick={() => handleProcess(item.id)}>Process</button>
-              </td>
+              <td>{item.totalPrice}</td>
             </tr>
           ))}
         </tbody>
